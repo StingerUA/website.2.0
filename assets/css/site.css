@@ -100,6 +100,27 @@ body{
     background: #020617 !important;
   }
 
+  /* УДАЛЯЕМ ГОЛУБЫЕ ПОДЛОЖКИ НА МОБИЛКАХ */
+  .video-card, 
+  .video-item, 
+  .gallery-item, 
+  .gallery-category, 
+  .product-card, 
+  .shop-item,
+  .cart-item,
+  .basket-item,
+  .content-block,
+  [class*="container"], 
+  [class*="wrapper"] {
+    background: transparent !important;
+    background-image: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
   /* =========================================
      MOBILE CLEANUP: Убираем голубые подложки
      (Для страниц Видео, Галерея, Магазин, Корзина)

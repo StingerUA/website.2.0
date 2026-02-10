@@ -11,6 +11,11 @@
 
   <!-- İkinci sayfadan gelen özel stiller -->
   <style> :root { --header-bg: #020617; --accent: #00c2ff; --page-bg: #050b27; --text-main: #ffffff; --text-muted: #9ca3af; } /* Arka plan görseli entegrasyonu */ /* Ödeme ikonları stilleri */ .chart-payment-bar { display:flex; justify-content:center; margin-top: 20px; margin-bottom:18px; } .chart-payment-bar .payment-icons { position:relative; display: flex; gap:24px; justify-content:center; align-items:center; padding:6px 12px; border-radius:10px; z-index:3; /* Okunurluk için hafif arka plan */ } .chart-payment-bar .payment-icons img { width:52px; height:auto; opacity:0.95; } .chart-payment-bar .payment-icons-link { display:block !important; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:calc(100% + 36px); height:72px; background: transparent !important; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-radius:10px; z-index:2; cursor:pointer; } /* WhatsApp butonu için ek stil */ .whatsapp-btn { display: inline-block; margin-top: 10px; width: 100%; text-align: center; background-color: #25D366; color: white; padding: 10px; border-radius: 5px; text-decoration: none; font-weight: bold; } .whatsapp-btn:hover { background-color: #128C7E; } </style>
+    <style>
+      /* Override default site stylesheet background for cart page */
+      body{ background-color: var(--page-bg) !important; color: var(--text-main); }
+      html{ background-color: var(--page-bg) !important; }
+    </style>
 
   <!-- Scriptler -->
   <script src="/assets/js/include.js" defer></script>

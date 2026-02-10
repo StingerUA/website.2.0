@@ -97,6 +97,22 @@
   </div>
 </header>
 
+<style>
+/* Увеличить иконки в хедере в 2 раза, не затрагивая главный логотип */
+.header-logo img { transform: none; }
+.header-social img,
+.top-lang-switch img,
+.logo-sub-icons img,
+.header-cart-icon img,
+.alien-ghost img,
+.ai-widget-toggle img {
+  transform: scale(2);
+  transform-origin: center;
+  display: inline-block;
+}
+.header-cart-count { transform: none; }
+</style>
+
 <link rel="stylesheet" href="/assets/css/force-white-text.css">
 <link rel="stylesheet" href="/assets/css/shop-neon-overrides.css">
 <link rel="stylesheet" href="/assets/css/model-nav-overrides.css">

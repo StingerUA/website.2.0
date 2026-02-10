@@ -3,25 +3,21 @@
    improved readability on shop/cart/product pages (desktop + mobile).
 */
 
-/* White background for shop / cart / product containers */
+/* White background for shop / product containers only (exclude cart & main site) */
 .shop-container,
-.cart-page,
 .product-page,
 .product-list,
 .product-detail,
 .product-gallery,
 .product-card,
 .detail-info,
-.cart-item,
-.glass-card,
-main {
+.glass-card {
   background: #ffffff !important;
   color: #000000 !important;
 }
 
 /* Neon text + soft glow */
 .shop-container *,
-.cart-page *,
 .product-page *,
 .product-card .product-info *,
 .detail-info *,
@@ -32,7 +28,6 @@ main {
 
 /* Headings stronger glow */
 .shop-container h1,
-.cart-page h1,
 .product-page h1,
 .product-card h3,
 .detail-info h1,
@@ -79,11 +74,11 @@ main {
 
 /* Mobile: reduce shadow intensity for small screens */
 @media (max-width: 600px) {
-  .shop-container *, .cart-page *, .product-page * {
+  .shop-container *, .product-page * {
     text-shadow: none !important;
   }
   .product-card img { height: auto !important; }
 }
 
 /* Small utility: ensure link texts also use neon color in these pages */
-.shop-container a, .cart-page a, .product-page a { color: #000000 !important; text-shadow: none !important; }
+.shop-container a, .product-page a { color: #000000 !important; text-shadow: none !important; }

@@ -111,6 +111,7 @@
 <link rel="stylesheet" href="/assets/css/force-white-text.css">
 <link rel="stylesheet" href="/assets/css/shop-neon-overrides.css">
 <link rel="stylesheet" href="/assets/css/model-nav-overrides.css">
+<link rel="stylesheet" href="/assets/css/remove-blog-overlay.css">
 <link rel="stylesheet" href="/assets/css/fix-layout.css">
 <script src="/assets/js/menu-toggle.js" defer></script>
 <script src="/assets/js/cart.js" defer></script>
@@ -136,3 +137,20 @@
     }
   });
 </script>
+
+<style>
+  /* Shift logo and alien icon slightly right and add spacing */
+  .header-logo-container {
+    margin-left: 10px;
+    margin-right: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-sub-icons { display:flex; gap:8px; align-items:center; margin-left:6px; }
+  .alien-dropdown-container { margin-left:6px; }
+  @media (max-width: 900px) {
+    .header-logo-container { margin-left:6px; gap:8px; }
+    .logo-sub-icons { gap:6px; }
+  }
+</style>

@@ -47,7 +47,7 @@ main,
   color: var(--force-white) !important;
 }
 
-/* Keep structural elements (header/nav/footer) unaffected by the gradient rule and ensure they are transparent */
+/* Keep structural elements (header/nav/footer) unaffected by the gradient rule and ensure they are dark blue */
 header, nav, footer, .site-header, .site-footer, .header-inner, .footer-grid { 
-  background: transparent !important; 
+  background: #07143a !important; 
 }

@@ -1,0 +1,89 @@
+/* Neon-blue overrides for shop, cart and product pages
+   Applies white page backgrounds and neon-cyan text+shadow for
+   improved readability on shop/cart/product pages (desktop + mobile).
+*/
+
+/* White background for shop / cart / product containers */
+.shop-container,
+.cart-page,
+.product-page,
+.product-list,
+.product-detail,
+.product-gallery,
+.product-card,
+.detail-info,
+.cart-item,
+.glass-card,
+main {
+  background: #ffffff !important;
+  color: #00f0ff !important;
+}
+
+/* Neon text + soft glow */
+.shop-container *,
+.cart-page *,
+.product-page *,
+.product-card .product-info *,
+.detail-info *,
+.cart-item * {
+  color: #00f0ff !important;
+  text-shadow: 0 2px 12px rgba(0,240,255,0.16) !important;
+}
+
+/* Headings stronger glow */
+.shop-container h1,
+.cart-page h1,
+.product-page h1,
+.product-card h3,
+.detail-info h1,
+.detail-info h3,
+.related-products h2 {
+  color: #00f6ff !important;
+  text-shadow: 0 3px 18px rgba(0,246,255,0.22) !important;
+}
+
+/* Make product cards lighter and readable on white */
+.product-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,246,255,0.12) !important;
+  box-shadow: 0 8px 30px rgba(0,200,255,0.06) !important;
+}
+
+.detail-info,
+.glass-card {
+  background: rgba(255,255,255,0.98) !important;
+  border: 1px solid rgba(0,200,255,0.08) !important;
+  box-shadow: 0 8px 26px rgba(0,200,255,0.06) !important;
+}
+
+/* Cart items */
+.cart-item {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(0,220,255,0.06) !important;
+}
+
+/* Prices keep accent but ensure contrast */
+.product-price,
+.cart-item .item-price,
+.cart-summary .total {
+  color: #007f9a !important;
+  text-shadow: none !important;
+}
+
+/* Buttons: keep original backgrounds but ensure text readable */
+.btn-primary,
+.btn-glow,
+.btn-secondary {
+  color: #020617 !important;
+}
+
+/* Mobile: reduce shadow intensity for small screens */
+@media (max-width: 600px) {
+  .shop-container *, .cart-page *, .product-page * {
+    text-shadow: 0 1px 6px rgba(0,240,255,0.14) !important;
+  }
+  .product-card img { height: auto !important; }
+}
+
+/* Small utility: ensure link texts also use neon color in these pages */
+.shop-container a, .cart-page a, .product-page a { color: #00f6ff !important; text-shadow: 0 2px 10px rgba(0,240,255,0.14) !important; }

@@ -405,6 +405,8 @@ select, select option {
 
   object-fit:contain;
 
+  margin-left: 8px;
+
 }
 
 .footer-logo img {

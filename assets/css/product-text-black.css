@@ -7,6 +7,24 @@ html.product-text-black body * {
   stroke: #000000 !important;
 }
 
+/* Keep header and footer text/icons white */
+html.product-text-black header,
+html.product-text-black footer,
+html.product-text-black header *,
+html.product-text-black footer *,
+html.product-text-black [data-include^="/header"],
+html.product-text-black [data-include^="/header"] *,
+html.product-text-black [data-include*="header"],
+html.product-text-black [data-include*="header"] *,
+html.product-text-black [data-include^="/footer"],
+html.product-text-black [data-include^="/footer"] *,
+html.product-text-black [data-include*="footer"],
+html.product-text-black [data-include*="footer"] * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
 /* Ensure inputs and buttons text are also black */
 html.product-text-black input,
 html.product-text-black textarea,

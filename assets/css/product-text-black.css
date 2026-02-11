@@ -1,0 +1,22 @@
+/* Override to force black text on product pages */
+/* Applied with high specificity and !important to beat existing styles */
+html.product-text-black body,
+html.product-text-black body * {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Ensure inputs and buttons text are also black */
+html.product-text-black input,
+html.product-text-black textarea,
+html.product-text-black select,
+html.product-text-black button {
+  color: #000000 !important;
+}
+
+/* Specific for svg icons */
+html.product-text-black svg {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}

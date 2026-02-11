@@ -1,47 +1,89 @@
-/* Product pages override: white background and black text */
+/* Product pages override: solid white background and black text */
 html, body {
   background: #ffffff !important;
   color: #000000 !important;
 }
 
-/* Ensure most text becomes black */
+/* Hide decorative space background and any site-wide gradients */
+.space-bg {
+  display: none !important;
+  background: none !important;
+}
+
+/* Make most text black and remove translucent backgrounds */
 body * {
   color: #000000 !important;
   background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
-/* Specific overrides for common product page components */
+/* Replace glass / translucent cards with solid white */
 .glass-card {
-  background: rgba(255,255,255,0.95) !important;
-  border-color: rgba(0,0,0,0.08) !important;
+  background: #ffffff !important;
+  border-color: rgba(0,0,0,0.06) !important;
   color: #000000 !important;
+  backdrop-filter: none !important;
 }
 
+/* Ensure main image container is neutral */
 .main-image-container {
   background: transparent !important;
   border-color: transparent !important;
 }
 
-.btn-glow {
-  color: #000000 !important;
-}
-
+/* Make thumbnails neutral */
 .thumb-btn {
   background: transparent !important;
   border-color: #e5e7eb !important;
 }
 
+/* Payment icons keep original colors */
 .payment-icons img {
   filter: none !important;
   opacity: 1 !important;
 }
 
-/* Utility text overrides used in templates */
+/* Override utility text classes used in templates */
 .text-white, .text-gray-300, .text-gray-400, .text-gray-500 {
   color: #000000 !important;
 }
 
-/* Ensure inputs and buttons have readable text */
+/* Ensure form controls remain readable */
 input, button, select, textarea {
   color: #000000 !important;
 }
+
+/* Make the Add-to-cart button blue while keeping readable text */
+.btn-glow {
+  background: #60a5fa !important; /* blue-400 */
+  color: #000000 !important;
+  box-shadow: 0 8px 24px rgba(96,165,250,0.18) !important;
+  border: 1px solid rgba(37,99,235,0.12) !important;
+}
+
+/* If any elements used explicit white text, force them black */
+.btn-glow .text-white, .btn-glow.text-white {
+  color: #000000 !important;
+}
+
+/* Chart / analyze page specific overrides */
+.alba-card {
+  background: #ffffff !important;
+  border-color: rgba(0,0,0,0.06) !important;
+  color: #000000 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Fixed space backgrounds used on analyze/chart pages */
+.space-bg-fixed, .space-overlay {
+  display: none !important;
+  background: none !important;
+}
+
+/* Accent/text classes used on chart pages */
+.text-accent { color: #000000 !important; }
+.text-slate-200, .text-slate-300, .text-slate-400, .text-slate-500 { color: #000000 !important; }
+
+

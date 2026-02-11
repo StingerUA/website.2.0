@@ -97,6 +97,14 @@
 <script src="/assets/js/ai-widget.js" defer></script>
 <script src="/assets/js/model-nav-loader.js" defer></script>
 <style>
+  /* Make the Hizmetleri / Services nav link blue */
+  .main-nav a[href="/hizmetler.html"],
+  .main-nav a[href="/eng/hizmetler.html"],
+  .main-nav a[href="/rus/hizmetler.html"] {
+    color: var(--accent, #00c2ff) !important;
+  }
+</style>
+<style>
   /* Ensure albaspace text shifts right for this include variant */
   .albaspace-img { margin-left: 36px; display: inline-block; }
   @media (max-width: 900px) { .albaspace-img { margin-left: 12px; } }

@@ -1,0 +1,47 @@
+/* Product pages override: white background and black text */
+html, body {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Ensure most text becomes black */
+body * {
+  color: #000000 !important;
+  background-color: transparent !important;
+}
+
+/* Specific overrides for common product page components */
+.glass-card {
+  background: rgba(255,255,255,0.95) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+  color: #000000 !important;
+}
+
+.main-image-container {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+.btn-glow {
+  color: #000000 !important;
+}
+
+.thumb-btn {
+  background: transparent !important;
+  border-color: #e5e7eb !important;
+}
+
+.payment-icons img {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Utility text overrides used in templates */
+.text-white, .text-gray-300, .text-gray-400, .text-gray-500 {
+  color: #000000 !important;
+}
+
+/* Ensure inputs and buttons have readable text */
+input, button, select, textarea {
+  color: #000000 !important;
+}

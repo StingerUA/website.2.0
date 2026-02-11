@@ -114,9 +114,18 @@
 
 /* Сдвигаем текст/изображение albaspace вправо, чтобы не накладывалось на логотип */
 .albaspace-img {
-  margin-left: 48px;
+  margin-left: 60px;
   display: inline-block;
 }
+</style>
+
+<style>
+  /* Make cookie modal white across site when header is included */
+  .cookie-modal { background-color: #ffffff !important; color: #020617 !important; box-shadow: 0 12px 36px rgba(2,6,23,0.45) !important; border-radius: 8px !important; }
+  .cookie-header, .cookie-text, .cookie-link { color: #020617 !important; }
+  .cookie-link { color: var(--accent, #00c2ff) !important; }
+  .btn-settings { background-color: transparent !important; color: var(--accent, #00c2ff) !important; border-color: rgba(2,6,23,0.08) !important; }
+  .btn-accept { background-color: #000 !important; color: #fff !important; }
 </style>
 
 <link rel="stylesheet" href="/assets/css/force-white-text.css">
@@ -129,6 +138,24 @@
 <script src="/assets/js/lang-switch.js" defer></script>
 <script src="/assets/js/ai-widget.js" defer></script>
 <script src="/assets/js/model-nav-loader.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const hideOn = [
+      '/index.html',
+      '/shop.html',
+      '/hakkimizda.html',
+      '/hizmetler.html',
+      '/kupsat.html',
+      '/basindabiz.html',
+      '/galeri.html',
+      '/iletisim.html'
+    ];
+    if (hideOn.includes(location.pathname)) {
+      const btn = document.querySelector('.ai-widget-toggle');
+      if (btn) btn.style.display = 'none';
+    }
+  });
+</script>
 <script>
   function toggleAlienMenu(e) {
     e.preventDefault();
@@ -174,6 +201,19 @@
     .header-logo-container { margin-left: 6px; gap: 8px; }
     .logo-sub-icons { gap: 6px; }
     .albaspace-img { margin-left: 12px; }
+  }
+</style>
+
+<style>
+  /* Убираем голубые полупрозрачные панели на страницах контактов */
+  .page-wrapper:has(.contact-section),
+  .page-wrapper:has(.contact-section) .contact-card,
+  .contact-section .contact-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 </style>
 

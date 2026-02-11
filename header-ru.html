@@ -109,9 +109,18 @@
 
 /* Сдвигаем текст/изображение albaspace вправо, чтобы не накладывалось на логотип */
 .albaspace-img {
-  margin-left: 36px;
+  margin-left: 60px;
   display: inline-block;
 }
+</style>
+
+<style>
+  /* Make cookie modal white across site when header is included */
+  .cookie-modal { background-color: #ffffff !important; color: #020617 !important; box-shadow: 0 12px 36px rgba(2,6,23,0.45) !important; border-radius: 8px !important; }
+  .cookie-header, .cookie-text, .cookie-link { color: #020617 !important; }
+  .cookie-link { color: var(--accent, #00c2ff) !important; }
+  .btn-settings { background-color: transparent !important; color: var(--accent, #00c2ff) !important; border-color: rgba(2,6,23,0.08) !important; }
+  .btn-accept { background-color: #000 !important; color: #fff !important; }
 </style>
 
 <style>
@@ -158,4 +167,17 @@
   .logo-sub-icons { display:flex; gap:8px; align-items:center; margin-left:6px; }
   .alien-dropdown-container { margin-left:6px; }
   @media (max-width:900px) { .header-logo-container { margin-left:6px; gap:8px; } .logo-sub-icons { gap:6px; } }
+</style>
+
+<style>
+  /* Убираем голубые полупрозрачные панели на страницах контактов */
+  .page-wrapper:has(.contact-section),
+  .page-wrapper:has(.contact-section) .contact-card,
+  .contact-section .contact-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
 </style>

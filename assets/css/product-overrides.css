@@ -86,4 +86,48 @@ input, button, select, textarea {
 .text-accent { color: #000000 !important; }
 .text-slate-200, .text-slate-300, .text-slate-400, .text-slate-500 { color: #000000 !important; }
 
+/* ----- Product page specific visual fixes ----- */
+/* Apply only on product pages to avoid affecting other site areas */
+html.product-text-black .h-1.w-20.bg-blue-500 {
+  display: none !important; /* hide small blue stripe under "Bunları da beğenebilirsiniz" */
+}
+
+/* Remove large colored/rounded background in related-products section */
+html.product-text-black section.mt-24,
+html.product-text-black section.mt-24.reveal {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+/* Make sure the related-products container itself has no colored background */
+html.product-text-black #related-products-container,
+html.product-text-black #related-products-container > a,
+html.product-text-black #related-products-container > a > .relative {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Make the quantity selector clearly outlined with a black rounded rectangle */
+html.product-text-black [data-qty] {
+  background: transparent !important;
+  border: 2px solid #000000 !important;
+  border-radius: 12px !important;
+  padding: 2px !important;
+  height: auto !important;
+}
+
+html.product-text-black [data-qty] .qty-input {
+  color: #000000 !important;
+}
+
+/* Ensure add-to-cart button stays blue on product pages (extra specificity) */
+html.product-text-black .btn-glow {
+  background: #60a5fa !important;
+  color: #000000 !important;
+  box-shadow: 0 8px 24px rgba(96,165,250,0.18) !important;
+}
+
 

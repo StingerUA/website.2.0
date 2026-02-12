@@ -1,0 +1,45 @@
+/* Final overrides loaded at end of page (via footer) */
+/* Ensures these rules apply after Tailwind and inline styles */
+
+html.product-text-black section.mt-24,
+html.product-text-black section.mt-24.reveal {
+  background: #ffffff !important;
+  box-shadow: none !important;
+  border-radius: 12px !important;
+  padding: 28px !important;
+}
+
+/* Hide the small blue stripe under the title */
+html.product-text-black .h-1.w-20.bg-blue-500 {
+  display: none !important;
+}
+
+/* Make related product cards neutral (white background) */
+html.product-text-black #related-products-container,
+html.product-text-black #related-products-container .group,
+html.product-text-black #related-products-container .relative,
+html.product-text-black #related-products-container .bg-gray-900 {
+  background: #ffffff !important;
+  box-shadow: none !important;
+  border-radius: 12px !important;
+}
+
+/* Ensure titles and prices inside related cards are visible on white */
+html.product-text-black #related-products-container h3,
+html.product-text-black #related-products-container p {
+  color: #000000 !important;
+}
+
+/* Re-enforce Add-to-cart color */
+html.product-text-black .btn-glow {
+  background: #60a5fa !important;
+  color: #000000 !important;
+  border: 1px solid rgba(37,99,235,0.12) !important;
+}
+
+/* Ensure qty box remains outlined */
+html.product-text-black [data-qty] {
+  background: transparent !important;
+  border: 2px solid #000000 !important;
+  border-radius: 12px !important;
+}

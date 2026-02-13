@@ -43,3 +43,57 @@ html.product-text-black [data-qty] {
   border: 2px solid #000000 !important;
   border-radius: 12px !important;
 }
+
+/* Force the main product panel and surrounding container to white */
+html.product-text-black body,
+html.product-text-black main,
+html.product-text-black .max-w-7xl,
+html.product-text-black .product-grid,
+html.product-text-black .product-grid > div,
+html.product-text-black .reveal,
+html.product-text-black .main-image-container {
+  background: #ffffff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove any background gradients applied via inline styles or pseudo-elements */
+html.product-text-black body::before,
+html.product-text-black main::before,
+html.product-text-black .product-grid::before,
+html.product-text-black .reveal::before {
+  background: none !important;
+  display: none !important;
+}
+
+/* Strong override: remove any background images/gradients inside main on product pages */
+html.product-text-black main *,
+html.product-text-black .product-grid *,
+html.product-text-black .reveal * {
+  background-image: none !important;
+  background: transparent !important;
+}
+
+/* Force the product panel to be white (covers gradient panels) */
+html.product-text-black main,
+html.product-text-black .product-grid,
+html.product-text-black .reveal {
+  background: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+}
+
+/* Hide breadcrumb/bar pseudo-elements above titles (thin blue stripe) */
+html.product-text-black nav::before,
+html.product-text-black h1::before,
+html.product-text-black nav::after,
+html.product-text-black h1::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* Also hide any element that matches typical stripe classes */
+html.product-text-black .stripe, html.product-text-black .title-underline, html.product-text-black .breadcrumb-bar {
+  display: none !important;
+}

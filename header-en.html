@@ -19,7 +19,7 @@
           </a>
           <div id="alienMenu" style="display: none; position: absolute; left: 0; top: 120%; background: rgba(2, 6, 23, 0.95); border: 1px solid rgba(0, 194, 255, 0.3); border-radius: 12px; padding: 12px; min-width: 140px; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); z-index: 99999;">
              <a href="#" class="alien-menu-item">Sign In</a>
-             <a href="/eng/signup.html" class="alien-menu-item">Sign Up</a>
+             <a href="#" class="alien-menu-item open-signup">Sign Up</a>
           </div>
         </div>
       </div>
@@ -157,6 +157,9 @@
     }
   });
 </script>
+
+<!-- include signup modal so header injects modal on every page where header is included -->
+<div data-include="/assets/includes/signup-modal.html"></div>
 
 <style>
   /* Shift logo and alien icon slightly right and add spacing */

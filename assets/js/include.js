@@ -76,6 +76,48 @@ runAfterDomReady(() => {
           if (s.parentNode) s.parentNode.removeChild(s);
         });
         el.innerHTML = tmp.innerHTML;
+          // Process any nested data-include elements inside the injected fragment
+          const processNestedIncludes = async (rootEl) => {
+            const nested = Array.from(rootEl.querySelectorAll('[data-include], [data-include-html]'));
+            for (const n of nested) {
+              const nestedUrl = n.getAttribute('data-include') || n.getAttribute('data-include-html');
+              if (!nestedUrl) continue;
+              const nestedTry = [nestedUrl];
+              if (nestedUrl.startsWith('/')) nestedTry.push(nestedUrl.slice(1));
+              let nestedHtml = '';
+              let nestedErr;
+              for (const p of nestedTry) {
+                try {
+                  const res2 = await fetch(p, { cache: 'no-cache' });
+                  if (!res2.ok) throw new Error('Failed ' + res2.status + ' for ' + p);
+                  nestedHtml = await res2.text();
+                  break;
+                } catch (ee) { nestedErr = ee; }
+              }
+              if (!nestedHtml) {
+                console.error('[include.js] nested include failed', nestedUrl, nestedErr);
+                continue;
+              }
+              const tmp2 = document.createElement('div');
+              tmp2.innerHTML = nestedHtml;
+              const scripts2 = Array.from(tmp2.querySelectorAll('script'));
+              scripts2.forEach((s) => { if (s.parentNode) s.parentNode.removeChild(s); });
+              n.innerHTML = tmp2.innerHTML;
+              scripts2.forEach((oldScript) => {
+                const newScript = document.createElement('script');
+                Array.from(oldScript.attributes || []).forEach(({ name, value }) => {
+                  if (name === 'src') newScript.src = value; else newScript.setAttribute(name, value);
+                });
+                if (!oldScript.src) newScript.textContent = oldScript.textContent || '';
+                if (oldScript.async) newScript.async = true;
+                if (oldScript.defer) newScript.defer = true;
+                (document.head || document.documentElement).appendChild(newScript);
+              });
+              // recurse into newly-inserted fragment
+              await processNestedIncludes(n);
+            }
+          };
+          await processNestedIncludes(el);
         scripts.forEach((oldScript) => {
           const newScript = document.createElement("script");
           Array.from(oldScript.attributes || []).forEach(({ name, value }) => {

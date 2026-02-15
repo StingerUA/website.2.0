@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WebAR Визитка</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
+    <style>
+      body, html { margin: 0; padding: 0; height: 100%; font-family: system-ui, Arial, Helvetica, sans-serif; background: #000; color: #fff; }
+      .overlay {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 2;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 10px 14px; background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
+      }
+      .overlay h1 { font-size: 16px; margin: 0; font-weight: 600; }
+      .overlay p { margin: 0; font-size: 12px; opacity: 0.9; }
+      .actions { display: flex; gap: 8px; }
+      .btn {
+        appearance: none; border: 1px solid #3d82f6; color: #fff; background: #3b82f6;
+        padding: 6px 10px; border-radius: 8px; font-size: 12px; text-decoration: none;
+      }
+      .btn.secondary { background: transparent; border-color: #888; }
+      .hint {
+        position: fixed; left: 50%; transform: translateX(-50%); bottom: 10px; z-index: 2;
+        background: rgba(0,0,0,0.55); padding: 8px 12px; border-radius: 8px; font-size: 12px;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="overlay">
+      <div>
+        <h1>Business AR Card</h1>
+        <p>Point your camera at the image target to view the 3D model.</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="../index.html" target="_self">Home</a>
+        <a class="btn secondary" href="#" onclick="alert('Allow camera to start AR');return false;">Help</a>
+      </div>
+    </div>
+    <div class="hint">Allow camera access. Keep the target fully in view.</div>
+    <a-scene 
+      mindar-image="imageTargetSrc: ./targets.mind; filterMinCF:0.0001; filterBeta: 0.001;" 
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights: true" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false">
+
+      <a-assets>
+        <a-asset-item id="myModel" src="./zhurong.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity light="type: ambient; intensity: 0.6"></a-entity>
+        <a-entity light="type: directional; intensity: 1.0" position="1 1 0.5"></a-entity>
+        <a-gltf-model 
+          src="#myModel" 
+          rotation="0 0 0" 
+          position="0 0 0" 
+          scale="0.5 0.5 0.5" 
+          animation-mixer="clip: *; loop: repeat">
+        </a-gltf-model>
+
+      </a-entity>
+    </a-scene>
+  </body>
+</html>

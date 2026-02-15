@@ -97,3 +97,30 @@ html.product-text-black h1::after {
 html.product-text-black .stripe, html.product-text-black .title-underline, html.product-text-black .breadcrumb-bar {
   display: none !important;
 }
+
+/* Product pages: dark navy footer */
+html.product-text-black footer,
+html.product-text-black .footer,
+html.product-text-black .footer-bottom {
+  background: #072146 !important;
+  color: #ffffff !important;
+}
+
+html.product-text-black footer a,
+html.product-text-black footer .footer-action__title,
+html.product-text-black footer .footer-action__value,
+html.product-text-black footer .footer-action__hint,
+html.product-text-black footer p {
+  color: rgba(255,255,255,0.95) !important;
+}
+
+/* Make social and icon images visible on dark background */
+html.product-text-black footer img {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* If there are brand logos that should remain original, reset their filter by class */
+html.product-text-black .footer-logo img.albaspace-img {
+  filter: none !important;
+}
+

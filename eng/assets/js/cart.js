@@ -164,7 +164,7 @@
     updateBadge();
     try {
       const headerSocial = document.querySelector('.header-social');
-      if (headerSocial && !headerSocial.querySelector('.header-cart-link')) {
+      if (headerSocial && !document.querySelector('.header-cart-link')) {
         const lang = document.documentElement.lang || 'en';
         const cartUrl = lang.toLowerCase().startsWith('tr') ? '/tr/cart.html' : '/eng/cart.html';
         const link = document.createElement('a');

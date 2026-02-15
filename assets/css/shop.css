@@ -208,6 +208,28 @@
   border-radius: 999px;
 }
 
+/* Header Cart Icon (Hardcoded) */
+.header-cart-icon {
+  position: relative;
+  display: inline-block;
+}
+
+.header-cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 16px;
+  padding: 1px 4px;
+  border-radius: 999px;
+  background: var(--accent, #00c2ff);
+  color: var(--header-bg, #020617);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  z-index: 10; /* Ensure it is on top */
+}
+
 /* =========================
    Header and Navigation
    ========================= */

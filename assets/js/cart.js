@@ -165,7 +165,7 @@
     const topLangSwitch = headerSocial.querySelector('.top-lang-switch');
     if (!topLangSwitch) return false;
 
-    if (topLangSwitch.querySelector('.header-cart-link')) return true;
+    if (document.querySelector('.header-cart-link')) return true;
 
     const path = window.location.pathname || '';
     const lang = (document.documentElement.lang || '').toLowerCase();

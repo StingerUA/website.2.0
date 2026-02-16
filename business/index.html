@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <title>WebAR Визитка</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
     <style>
-      body, html { margin: 0; padding: 0; height: 100%; font-family: system-ui, Arial, Helvetica, sans-serif; background: #000; color: #fff; }
+      /* Жестко заставляем фон быть прозрачным, чтобы камера просвечивала */
+      body, html { 
+        margin: 0; padding: 0; width: 100%; height: 100%; 
+        overflow: hidden; 
+        background-color: transparent !important; 
+        font-family: system-ui, Arial, Helvetica, sans-serif; 
+        color: #fff; 
+      }
+      
+      /* Принудительно делаем сцену A-Frame прозрачной */
+      .a-canvas {
+        background-color: transparent !important;
+      }
+
+      /* Видео с камеры (создается MindAR) - заставляем его работать корректно */
+      video {
+        position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+        object-fit: cover; z-index: -2;
+      }
+
       .overlay {
-        position: fixed; top: 0; left: 0; right: 0; z-index: 2;
+        position: fixed; top: 0; left: 0; right: 0; z-index: 10;
         display: flex; align-items: center; justify-content: space-between;
         padding: 10px 14px; background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
       }
@@ -18,13 +37,13 @@
       .actions { display: flex; gap: 8px; }
       .btn {
         appearance: none; border: 1px solid #3d82f6; color: #fff; background: #3b82f6;
-        padding: 6px 10px; border-radius: 8px; font-size: 12px; text-decoration: none;
-        cursor: pointer;
+        padding: 6px 10px; border-radius: 8px; font-size: 12px; text-decoration: none; cursor: pointer;
       }
-      .btn.secondary { background: transparent; border-color: #888; }
+      .btn.secondary { background: rgba(0,0,0,0.5); border-color: #888; }
       .hint {
-        position: fixed; left: 50%; transform: translateX(-50%); bottom: 10px; z-index: 2;
-        background: rgba(0,0,0,0.55); padding: 8px 12px; border-radius: 8px; font-size: 12px;
+        position: fixed; left: 50%; transform: translateX(-50%); bottom: 20px; z-index: 10;
+        background: rgba(0,0,0,0.7); padding: 8px 12px; border-radius: 8px; font-size: 12px;
+        text-align: center; width: 80%;
       }
     </style>
   </head>
@@ -33,19 +52,19 @@
     <div class="overlay">
       <div>
         <h1>Business AR Card</h1>
-        <p>Point your camera at the image target to view the 3D model.</p>
+        <p>Point camera at the image target.</p>
       </div>
       <div class="actions">
-        <a class="btn" href="../index.html" target="_self">Home</a>
+        <button id="btn-start" class="btn">Start AR</button>
         <button id="btn-torch" class="btn secondary" style="display: none;">Light</button>
-        <a class="btn secondary" href="#" onclick="alert('Allow camera to start AR');return false;">Help</a>
       </div>
     </div>
-    <div class="hint">Allow camera access. Keep the target fully in view.</div>
+    <div id="hint-text" class="hint">Loading AR... Please wait.</div>
+    
     <a-scene 
-      mindar-image="imageTargetSrc: ./targets.mind; filterMinCF:0.0001; filterBeta: 0.001;" 
+      mindar-image="imageTargetSrc: ./targets.mind; filterMinCF:0.0001; filterBeta: 0.001; autoStart: true;" 
       color-space="sRGB" 
-      renderer="colorManagement: true, physicallyCorrectLights: true" 
+      renderer="colorManagement: true, physicallyCorrectLights: true, alpha: true" 
       vr-mode-ui="enabled: false" 
       device-orientation-permission-ui="enabled: false">
 
@@ -55,10 +74,10 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- Model visible directly in front of camera -->
-      <a-entity position="0 0 -1.5">
-        <a-entity light="type: ambient; intensity: 1.0"></a-entity>
-        <a-entity light="type: directional; intensity: 1.0" position="1 1 0.5"></a-entity>
+      <a-entity light="type: ambient; intensity: 1.0"></a-entity>
+      <a-entity light="type: directional; intensity: 1.0" position="1 1 0.5"></a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model 
           src="#myModel" 
           rotation="0 0 0" 
@@ -68,36 +87,66 @@
         </a-gltf-model>
       </a-entity>
     </a-scene>
+    
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const sceneEl = document.querySelector('a-scene');
-        const btn = document.getElementById("btn-torch");
-        
+        const hintEl = document.getElementById('hint-text');
+        const startBtn = document.getElementById('btn-start');
+        const torchBtn = document.getElementById("btn-torch");
+
+        // Обработка клика по кнопке Start (для обхода блокировки камеры браузером)
+        startBtn.addEventListener('click', () => {
+           hintEl.innerText = "Please allow camera access...";
+           // Иногда требуется любое действие пользователя, чтобы видео начало воспроизводиться
+           const video = document.querySelector("video");
+           if (video) video.play().catch(e => console.log("Auto-play prevented", e));
+        });
+
+        // Отлов ошибок MindAR (если файл targets.mind не найден, покажет ошибку)
+        sceneEl.addEventListener("arError", (event) => {
+          hintEl.innerText = "Error loading AR. Check target file or permissions.";
+          hintEl.style.backgroundColor = "red";
+          alert("КРИТИЧЕСКАЯ ОШИБКА: Камера заблокирована ИЛИ файл targets.mind не найден на сервере. Проверьте правильность написания имени файла на GitHub.");
+        });
+
+        // Когда AR успешно запустился
         sceneEl.addEventListener("arReady", (event) => {
+          hintEl.innerText = "Camera active. Find the target image!";
+          startBtn.style.display = "none"; // Прячем кнопку старта
+          
           const video = document.querySelector("video");
           if (video && video.srcObject) {
             const track = video.srcObject.getVideoTracks()[0];
             const capabilities = track.getCapabilities ? track.getCapabilities() : {};
             
+            // Фонарик
             if (capabilities.torch) {
-              btn.style.display = "inline-block";
-              
+              torchBtn.style.display = "inline-block";
               let isTorchOn = false;
-              btn.addEventListener("click", async () => {
+              torchBtn.addEventListener("click", async () => {
                 try {
-                  await track.applyConstraints({
-                    advanced: [{ torch: !isTorchOn }]
-                  });
+                  await track.applyConstraints({ advanced: [{ torch: !isTorchOn }] });
                   isTorchOn = !isTorchOn;
-                  btn.style.backgroundColor = isTorchOn ? "#fff" : "transparent";
-                  btn.style.color = isTorchOn ? "#000" : "#fff";
-                  btn.innerText = isTorchOn ? "Light On" : "Light";
+                  torchBtn.style.backgroundColor = isTorchOn ? "#fff" : "rgba(0,0,0,0.5)";
+                  torchBtn.style.color = isTorchOn ? "#000" : "#fff";
                 } catch (err) {
                   console.error("Torch error:", err);
                 }
               });
             }
           }
+        });
+
+        // События нахождения маркера
+        sceneEl.addEventListener("targetFound", event => {
+          hintEl.innerText = "Target found!";
+          hintEl.style.backgroundColor = "green";
+        });
+
+        sceneEl.addEventListener("targetLost", event => {
+          hintEl.innerText = "Target lost. Keep it in view.";
+          hintEl.style.backgroundColor = "rgba(0,0,0,0.7)";
         });
       });
     </script>

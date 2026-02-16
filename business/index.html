@@ -7,7 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
     <style>
-      /* Жестко заставляем фон быть прозрачным, чтобы камера просвечивала */
       body, html { 
         margin: 0; padding: 0; width: 100%; height: 100%; 
         overflow: hidden; 
@@ -15,18 +14,11 @@
         font-family: system-ui, Arial, Helvetica, sans-serif; 
         color: #fff; 
       }
-      
-      /* Принудительно делаем сцену A-Frame прозрачной */
-      .a-canvas {
-        background-color: transparent !important;
-      }
-
-      /* Видео с камеры (создается MindAR) - заставляем его работать корректно */
+      .a-canvas { background-color: transparent !important; }
       video {
         position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
         object-fit: cover; z-index: -2;
       }
-
       .overlay {
         position: fixed; top: 0; left: 0; right: 0; z-index: 10;
         display: flex; align-items: center; justify-content: space-between;
@@ -80,9 +72,9 @@
       <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model 
           src="#myModel" 
-          rotation="0 0 0" 
-          position="0 -0.5 0" 
-          scale="0.5 0.5 0.5" 
+          rotation="90 0 90" 
+          position="0 0 0" 
+          scale="1 1 1" 
           animation-mixer="clip: *; loop: repeat">
         </a-gltf-model>
       </a-entity>
@@ -95,32 +87,19 @@
         const startBtn = document.getElementById('btn-start');
         const torchBtn = document.getElementById("btn-torch");
 
-        // Обработка клика по кнопке Start (для обхода блокировки камеры браузером)
         startBtn.addEventListener('click', () => {
-           hintEl.innerText = "Please allow camera access...";
-           // Иногда требуется любое действие пользователя, чтобы видео начало воспроизводиться
            const video = document.querySelector("video");
-           if (video) video.play().catch(e => console.log("Auto-play prevented", e));
+           if (video) video.play();
         });
 
-        // Отлов ошибок MindAR (если файл targets.mind не найден, покажет ошибку)
-        sceneEl.addEventListener("arError", (event) => {
-          hintEl.innerText = "Error loading AR. Check target file or permissions.";
-          hintEl.style.backgroundColor = "red";
-          alert("КРИТИЧЕСКАЯ ОШИБКА: Камера заблокирована ИЛИ файл targets.mind не найден на сервере. Проверьте правильность написания имени файла на GitHub.");
-        });
-
-        // Когда AR успешно запустился
         sceneEl.addEventListener("arReady", (event) => {
-          hintEl.innerText = "Camera active. Find the target image!";
-          startBtn.style.display = "none"; // Прячем кнопку старта
+          hintEl.innerText = "Find the target image!";
+          startBtn.style.display = "none";
           
           const video = document.querySelector("video");
           if (video && video.srcObject) {
             const track = video.srcObject.getVideoTracks()[0];
             const capabilities = track.getCapabilities ? track.getCapabilities() : {};
-            
-            // Фонарик
             if (capabilities.torch) {
               torchBtn.style.display = "inline-block";
               let isTorchOn = false;
@@ -128,17 +107,12 @@
                 try {
                   await track.applyConstraints({ advanced: [{ torch: !isTorchOn }] });
                   isTorchOn = !isTorchOn;
-                  torchBtn.style.backgroundColor = isTorchOn ? "#fff" : "rgba(0,0,0,0.5)";
-                  torchBtn.style.color = isTorchOn ? "#000" : "#fff";
-                } catch (err) {
-                  console.error("Torch error:", err);
-                }
+                } catch (err) { console.error(err); }
               });
             }
           }
         });
 
-        // События нахождения маркера
         sceneEl.addEventListener("targetFound", event => {
           hintEl.innerText = "Target found!";
           hintEl.style.backgroundColor = "green";

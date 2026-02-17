@@ -96,7 +96,11 @@
 /* Увеличить иконки в хедере в 2 раза, не затрагивая главный логотип */
 .header-logo img { transform: scale(1.75); }
 .header-social img,
-.top-lang-switch img,
+.top-lang-switch img {
+  transform: scale(4); /* Increased from 2 to 4 per user request */
+  transform-origin: center;
+  display: inline-block;
+}
 .logo-sub-icons img,
 .header-cart-icon img,
 .alien-ghost img,
@@ -217,5 +221,21 @@
     box-shadow: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+  }
+</style>
+
+<style>
+  /* Remove borders/outlines under logo, AI agent, alien icons - aggressively */
+  .header-logo-container,
+  .header-logo-container *,
+  .logo-sub-icons,
+  .logo-sub-icons *,
+  .ai-widget-toggle,
+  .alien-ghost,
+  .alien-dropdown-container {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
   }
 </style>

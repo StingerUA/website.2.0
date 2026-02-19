@@ -1,51 +1,42 @@
 /* White Theme Overrides for Cart Page */
 
-/* Force light theme variables */
-:root {
-  --page-bg: #ffffff !important;
-  --text-main: #000000 !important;
-  --text-muted: #333333 !important;
-  /* Keep header-bg dark if we want to preserve header appearance */
-  /* --header-bg: #020617; */ 
-}
-
-/* Force body background to white and text to black */
+/* Белый фон только для области контента (header/footer остаются своими) */
 body, html {
   background-color: #ffffff !important;
   background-image: none !important;
-  color: #000000 !important;
 }
 
-/* Reset specific container backgrounds (blue/semi-transparent) */
-.cart-page, 
-.cart-summary, 
+/* Убираем голубые/полупрозрачные подложки только в блоках корзины */
+.cart-page,
+.cart-page *:not(button):not(.btn-primary):not(.btn-secondary):not(.whatsapp-btn),
+.cart-summary,
+.cart-summary *,
 .cart-item,
+.cart-item *,
 .cart-total-row,
 .shipping-estimate,
+.shipping-estimate *,
 .shipping-estimate form,
 .chart-payment-bar,
 .payment-icons,
-.payment-icons-link,
-.qty-control .qty-btn,
-.qty-control .qty-input,
-.size-select,
-.product-card,
-.detail-info {
+.payment-icons-link {
   background: transparent !important;
   background-color: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   box-shadow: none !important;
-  border-color: rgba(0,0,0,0.2) !important; /* Light border for structure */
 }
 
-/* Ensure text is black */
-h1, h2, h3, h4, h5, h6, p, span, div, label, li, td, th {
+/* Все надписи в области корзины делаем черными */
+.cart-page,
+.cart-page * {
   color: #000000 !important;
 }
 
-/* Fix input fields */
-input, select, textarea {
+/* Поля ввода в корзине */
+.cart-page input,
+.cart-page select,
+.cart-page textarea {
   background-color: #ffffff !important;
   color: #000000 !important;
   border: 1px solid #ccc !important;

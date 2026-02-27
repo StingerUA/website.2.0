@@ -66,10 +66,10 @@ html.product-text-black .reveal::before {
   display: none !important;
 }
 
-/* Strong override: remove any background images/gradients inside main on product pages */
-html.product-text-black main *,
-html.product-text-black .product-grid *,
-html.product-text-black .reveal * {
+/* Strong override: remove any background images/gradients inside main on product pages (exclude signup modal) */
+html.product-text-black main *:not(.signup-modal-overlay):not(.signup-modal-overlay *),
+html.product-text-black .product-grid *:not(.signup-modal-overlay):not(.signup-modal-overlay *),
+html.product-text-black .reveal *:not(.signup-modal-overlay):not(.signup-modal-overlay *) {
   background-image: none !important;
   background: transparent !important;
 }

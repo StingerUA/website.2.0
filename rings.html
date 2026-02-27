@@ -115,7 +115,9 @@
 
                 const dx = pJoint.x - pBase.x;
                 const dy = pJoint.y - pBase.y;
-                const angle = Math.atan2(dy, dx); 
+                // Three.js Y is positive up, screen Y is positive down.
+                // We use -dy to get the correct angle in Three.js space.
+                const angle = Math.atan2(-dy, dx); 
 
                 const x = (pBase.x + pJoint.x) / 2;
                 const y = (pBase.y + pJoint.y) / 2;
@@ -126,9 +128,10 @@
 
                 // Обновляем окклюдер
                 occluder.position.set(screenX, screenY, screenZ);
-                occluder.rotation.z = angle - Math.PI / 3;
-                occluder.rotation.x = 0.4; 
-                occluder.rotation.y = 0.4; 
+                // Для цилиндра (Y-up), чтобы он указывал в сторону angle, нужно повернуть его на angle - PI/2.
+                occluder.rotation.z = angle - Math.PI / 2;
+                occluder.rotation.x = 0; 
+                occluder.rotation.y = 0; 
 
                 
                 // Масштабируем окклюдер пропорционально кольцу
@@ -140,6 +143,10 @@
                 if (currentRing) {
                     currentRing.position.copy(occluder.position);
                     currentRing.rotation.copy(occluder.rotation);
+                    // Если камень кольца смотрит не туда, можно добавить поворот вокруг оси пальца (Y)
+                    // Обычно в таких моделях камень должен смотреть "на камеру" (по оси Z)
+                    currentRing.rotateY(Math.PI / 2); // Попробуем довернуть на 90 градусов
+                    
                     // Применяем текущий масштаб
                     currentRing.scale.set(ringScale, ringScale, ringScale);
                 }

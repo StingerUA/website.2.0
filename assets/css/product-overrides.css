@@ -10,8 +10,8 @@ html, body {
   background: none !important;
 }
 
-/* Make most text black and remove translucent backgrounds */
-body * {
+/* Make most text black and remove translucent backgrounds (exclude signup modal) */
+body *:not(.signup-modal-overlay):not(.signup-modal-overlay *) {
   color: #000000 !important;
   background-color: transparent !important;
   border-color: transparent !important;

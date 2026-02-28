@@ -4,6 +4,9 @@
 
     <!-- Logo -->
     <div class="header-logo-container">
+      <a href="/index.html" class="header-logo-icon">
+        <img src="/assets/images/albalogo.png" alt="Logo">
+      </a>
       <a href="/eng/index.html" class="header-logo">
         <img src="/assets/images/albaspace.png" alt="AlbaSpace" class="albaspace-img">
       </a>
@@ -93,7 +96,8 @@
 
 <style>
 /* Увеличить иконки в хедере в 2 раза, не затрагивая главный логотип */
-.header-logo img { transform: scale(1.75); }
+.header-logo-icon img { transform: scale(1.75); transform-origin: center; display: inline-block; }
+.header-logo img { transform: scale(7.0); }
 .header-social img,
 .top-lang-switch img {
   transform: scale(4); /* Increased from 2 to 4 per user request */
@@ -110,7 +114,7 @@
 }
 .header-cart-count { transform: none; }
 /* Move AlbaSpace image slightly right so it doesn't overlap main logo */
-.albaspace-img { margin-left: 60px; display: inline-block; }
+.albaspace-img { margin-left: 10px; display: inline-block; }
 </style>
 
 <style>

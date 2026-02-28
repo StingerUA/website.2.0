@@ -42,8 +42,8 @@ html.product-text-black svg {
 /* Make header and footer backgrounds dark blue on product pages */
 html.product-text-black .site-header,
 html.product-text-black header.site-header {
-  background: #061f3a !important; /* dark navy */
-  border-bottom: 1px solid rgba(255,255,255,0.03) !important;
+  background: #020617 !important; /* deep dark blue */
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
 }
 
 html.product-text-black footer,
@@ -51,7 +51,7 @@ html.product-text-black .footer,
 html.product-text-black .footer--tr,
 html.product-text-black .footer--en,
 html.product-text-black .footer--ru {
-  background: #061f3a !important;
+  background: #020617 !important;
   color: #ffffff !important;
 }
 
@@ -68,4 +68,4 @@ html.product-text-black .footer img {
 }
 
 /* If header uses CSS variable --header-bg, override it */
-html.product-text-black { --header-bg: #061f3a !important; }
+html.product-text-black { --header-bg: #020617 !important; }
